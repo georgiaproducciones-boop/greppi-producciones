@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GREPPI PRODUCCIONES | Eventos y Espectáculos Exclusivos</title>
+    <style>
+        :root {
+            --gold: #C9A24D;
+            --black: #000000;
+            --dark: #0a0a0a;
+            --white: #ffffff;
+            --gray: #888888;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--black);
+            color: var(--white);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            padding: 0.8rem 2rem;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(201, 162, 77, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .logo-text {
+            color: var(--gold);
+            font-size: 1rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.7;
+        }
+
+        .lang-toggle {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 0.4rem 0.8rem;
+            cursor: pointer;
+            font-size: 0.75rem;
+            transition: all 0.3s;
+        }
+
+        .lang-toggle:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 2px;
+            background: var(--gold);
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 2rem;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h1, h2, h3 {
+            color: var(--gold);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--gold);
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .highlight {
+            font-weight: bold;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 0.8rem 2rem;
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        .btn:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        /* Hero Section */
+        #inicio {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: 700px;
+            z-index: 1;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Media elements */
+        .media-container {
+            margin: 1.5rem 0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .media-container img,
+        .media-container video {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .media-grid img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        /* Shows Section */
+        .show-card {
+            background: var(--dark);
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            border-left: 3px solid var(--gold);
+        }
+
+        .show-card .ideal {
+            color: var(--gold);
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+
+        .show-card .ideal-list {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .show-card video {
+            margin-top: 1rem;
+        }
+
+        /* Custom Shows */
+        .features-list {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .features-list li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .features-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 8px;
+            height: 8px;
+            background: var(--gold);
+            transform: translateY(-50%) rotate(45deg);
+        }
+
+        /* Comparison */
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .comparison-col h3 {
+            margin-bottom: 1rem;
+        }
+
+        .comparison-col ul {
+            list-style: none;
+        }
+
+        .comparison-col li {
+            padding: 0.5rem 0;
+            color: var(--white);
+        }
+
+        /* Artists Section */
+        .artists-category {
+            margin-bottom: 3rem;
+        }
+
+        .artists-category > h3 {
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--gold);
+            padding-bottom: 0.5rem;
+        }
+
+        .artist-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .artist-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+            aspect-ratio: 1;
+        }
+
+        .artist-item img,
+        .artist-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .artist-item:hover img,
+        .artist-item:hover video {
+            transform: scale(1.05);
+        }
+
+        .artist-item .label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            padding: 2rem 0.8rem 0.8rem;
+            color: var(--white);
+            font-size: 0.85rem;
+        }
+
+        /* Contact Form */
+        #contacto {
+            background: var(--dark);
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--black);
+            border: 1px solid rgba(201, 162, 77, 0.3);
+            color: var(--white);
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-group select {
+            cursor: pointer;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid rgba(201, 162, 77, 0.3);
+        }
+
+        footer p {
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+
+        /* Divider */
+        .divider {
+            width: 60px;
+            height: 2px;
+            background: var(--gold);
+            margin: 2rem 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(0, 0, 0, 0.98);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .logo-text {
+                font-size: 0.85rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .comparison {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .artist-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .media-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 80px 1.5rem;
+            }
+        }
+
+        /* Language switching */
+        .lang-en { display: none; }
+        body.en .lang-es { display: none; }
+        body.en .lang-en { display: block; }
+        body.en .lang-en-inline { display: inline; }
+        body.en .lang-es-inline { display: none; }
+        .lang-es-inline { display: inline; }
+        .lang-en-inline { display: none; }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="#inicio" class="logo">
+                <img src="media/Logotipo_.webp" alt="Greppi Producciones">
+                <span class="logo-text">GREPPI PRODUCCIONES</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#inicio"><span class="lang-es-inline">INICIO</span><span class="lang-en-inline">HOME</span></a></li>
+                <li><a href="#espectaculos"><span class="lang-es-inline">ESPECTÁCULOS</span><span class="lang-en-inline">SHOWS</span></a></li>
+                <li><a href="#medida"><span class="lang-es-inline">A MEDIDA</span><span class="lang-en-inline">CUSTOM</span></a></li>
+                <li><a href="#artistas"><span class="lang-es-inline">ARTISTAS</span><span class="lang-en-inline">ARTISTS</span></a></li>
+                <li><a href="#contacto"><span class="lang-es-inline">CONTACTO</span><span class="lang-en-inline">CONTACT</span></a></li>
+                <li><button class="lang-toggle" onclick="toggleLanguage()">EN / ES</button></li>
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio">
+        <div class="hero-bg">
+            <img src="media/Club_Alma_070.jpg" alt="Greppi Producciones Event">
+        </div>
+        <div class="hero-content">
+            <h1>
+                <span class="lang-es">Producción de eventos y fiestas exclusivas a medida</span>
+                <span class="lang-en">Bespoke Event Production & Exclusive Parties</span>
+            </h1>
+            <p>
+                <span class="lang-es">Creamos <span class="highlight">experiencias únicas</span> para empresas y clientes privados que buscan algo más que una celebración: fiestas temáticas, espectáculos personalizados y eventos <span class="highlight">exclusivos diseñados</span> para sorprender y emocionar.</span>
+                <span class="lang-en">We create <span class="highlight">unique experiences</span> for businesses and private clients seeking more than just a celebration: themed parties, personalized shows, and <span class="highlight">exclusive events designed</span> to surprise and move.</span>
+            </p>
+            <a href="#contacto" class="btn">
+                <span class="lang-es-inline">Cuéntanos tu idea</span>
+                <span class="lang-en-inline">Tell us your idea</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Shows Section -->
+    <section id="espectaculos">
+        <div class="container">
+            <h2>
+                <span class="lang-es">ESPECTÁCULOS</span>
+                <span class="lang-en">SHOWS</span>
+            </h2>
+            <p class="subtitle">
+                <span class="lang-es">Espectáculos exclusivos prediseñados para eventos</span>
+                <span class="lang-en">Exclusive pre-designed shows for events</span>
+            </p>
+            <p>
+                <span class="lang-es">En GREPPI PRODUCCIONES ofrecemos una cuidada selección de <span class="highlight">espectáculos prediseñados</span> que han sido desarrollados y ejecutados con éxito en distintos eventos.</span>
+                <span class="lang-en">At GREPPI PRODUCCIONES we offer a curated selection of <span class="highlight">pre-designed shows</span> that have been successfully developed and performed at various events.</span>
+            </p>
+            <div class="divider"></div>
+
+            <!-- Gatsby Show -->
+            <div class="show-card">
+                <h3>Gatsby Show</h3>
+                <p class="subtitle">
+                    <span class="lang-es">Inspirado en los años 20 y el glamour del Art Déco</span>
+                    <span class="lang-en">Inspired by the 1920s and Art Deco glamour</span>
+                </p>
+                <div class="media-container">
+                    <img src="media/Gatsby 2.jpg" alt="Gatsby Show">
+                </div>
+                <p>
+                    <span class="lang-es">Un espectáculo elegante y sofisticado que transporta al público a la época dorada del jazz y el lujo. Música, baile y estética años 20 se combinan para crear una experiencia visual y emocional perfecta para eventos exclusivos.</span>
+                    <span class="lang-en">An elegant and sophisticated show that transports the audience to the golden age of jazz and luxury. Music, dance, and 1920s aesthetics combine to create a visual and emotional experience perfect for exclusive events.</span>
+                </p>
+                <p class="ideal">
+                    <span class="lang-es">Ideal para:</span>
+                    <span class="lang-en">Ideal for:</span>
+                </p>
+                <p class="ideal-list">
+                    <span class="lang-es">Eventos corporativos · Fiestas privadas · Cócteles de alto nivel</span>
+                    <span class="lang-en">Corporate events · Private parties · High-end cocktail events</span>
+                </p>
+            </div>
+
+            <!-- Greatest Showman -->
+            <div class="show-card">
+                <h3>The Greatest Showman Experience</h3>
+                <p class="subtitle">
+                    <span class="lang-es">Un espectáculo vibrante, visual y emocionante</span>
+                    <span class="lang-en">A vibrant, visual, and exciting show</span>
+                </p>
+                <div class="media-container">
+                    <video controls poster="media/Fiesta Africana.jpg">
+                        <source src="media/Gran Showman_.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <p>
+                    <span class="lang-es">Inspirado en el universo del circo contemporáneo y el musical, este espectáculo combina música, coreografías impactantes y una puesta en escena llena de energía.</span>
+                    <span class="lang-en">Inspired by contemporary circus and musical theater, this show combines music, striking choreography, and an energy-filled staging.</span>
+                </p>
+                <p class="ideal">
+                    <span class="lang-es">Ideal para:</span>
+                    <span class="lang-en">Ideal for:</span>
+                </p>
+                <p class="ideal-list">
+                    <span class="lang-es">Eventos de empresa · Presentaciones de marca · Grandes celebraciones</span>
+                    <span class="lang-en">Corporate events · Brand presentations · Grand celebrations</span>
+                </p>
+            </div>
+
+            <!-- Moulin Rouge -->
+            <div class="show-card">
+                <h3>Moulin Rouge Show</h3>
+                <p class="subtitle">
+                    <span class="lang-es">Pasión, sensualidad y espectáculo</span>
+                    <span class="lang-en">Passion, sensuality, and spectacle</span>
+                </p>
+                <div class="media-container">
+                    <video controls>
+                        <source src="media/Moulin rouge_.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <p>
+                    <span class="lang-es">Un show inspirado en el cabaret parisino, con una estética intensa y elegante. Baile, música y teatralidad se unen para crear una experiencia sofisticada, atrevida y llena de carácter.</span>
+                    <span class="lang-en">A show inspired by Parisian cabaret, with an intense and elegant aesthetic. Dance, music, and theatricality unite to create a sophisticated, bold experience full of character.</span>
+                </p>
+                <p class="ideal">
+                    <span class="lang-es">Ideal para:</span>
+                    <span class="lang-en">Ideal for:</span>
+                </p>
+                <p class="ideal-list">
+                    <span class="lang-es">Eventos nocturnos · Fiestas privadas · Celebraciones exclusivas</span>
+                    <span class="lang-en">Evening events · Private parties · Exclusive celebrations</span>
+                </p>
+            </div>
+
+            <!-- Bollywood -->
+            <div class="show-card">
+                <h3>Bollywood Experience</h3>
+                <p class="subtitle">
+                    <span class="lang-es">Color, ritmo y energía en estado puro</span>
+                    <span class="lang-en">Color, rhythm, and pure energy</span>
+                </p>
+                <div class="media-container">
+                    <video controls>
+                        <source src="media/Bollywood video promo.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <p>
+                    <span class="lang-es">Un espectáculo lleno de color, música y coreografías inspiradas en el cine y la cultura Bollywood. Una experiencia dinámica y festiva que aporta alegría, movimiento y un fuerte impacto visual.</span>
+                    <span class="lang-en">A show full of color, music, and choreography inspired by Bollywood cinema and culture. A dynamic, festive experience that brings joy, movement, and strong visual impact.</span>
+                </p>
+                <p class="ideal">
+                    <span class="lang-es">Ideal para:</span>
+                    <span class="lang-en">Ideal for:</span>
+                </p>
+                <p class="ideal-list">
+                    <span class="lang-es">Eventos corporativos · Fiestas temáticas · Celebraciones multiculturales</span>
+                    <span class="lang-en">Corporate events · Themed parties · Multicultural celebrations</span>
+                </p>
+            </div>
+
+            <a href="#contacto" class="btn">
+                <span class="lang-es-inline">Solicitar información</span>
+                <span class="lang-en-inline">Request information</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Custom Shows Section -->
+    <section id="medida">
+        <div class="container">
+            <h2>
+                <span class="lang-es">ESPECTÁCULOS A MEDIDA</span>
+                <span class="lang-en">CUSTOM SHOWS</span>
+            </h2>
+            <p class="subtitle">
+                <span class="lang-es">Cuando el evento requiere algo verdaderamente único</span>
+                <span class="lang-en">When your event requires something truly unique</span>
+            </p>
+            <p>
+                <span class="lang-es">En GREPPI PRODUCCIONES creamos espectáculos a medida desde cero, adaptados al concepto, al espacio y al tipo de evento. Cada proyecto nace de una idea y se desarrolla de forma personalizada.</span>
+                <span class="lang-en">At GREPPI PRODUCCIONES we create custom shows from scratch, adapted to the concept, space, and type of event. Each project is born from an idea and developed in a personalized way.</span>
+            </p>
+
+            <div class="media-grid">
+                <img src="media/Bailarina.jpg" alt="Custom Show">
+                <img src="media/Bailarina3.jpg" alt="Custom Show">
+            </div>
+
+            <div class="divider"></div>
+
+            <h3>
+                <span class="lang-es">Para quienes buscan exclusividad real</span>
+                <span class="lang-en">For those seeking real exclusivity</span>
+            </h3>
+            <ul class="features-list">
+                <li>
+                    <span class="lang-es">Empresas que quieren un evento alineado con su identidad</span>
+                    <span class="lang-en">Companies wanting an event aligned with their identity</span>
+                </li>
+                <li>
+                    <span class="lang-es">Marcas que buscan una experiencia diferencial</span>
+                    <span class="lang-en">Brands seeking a differential experience</span>
+                </li>
+                <li>
+                    <span class="lang-es">Clientes privados que desean una celebración única</span>
+                    <span class="lang-en">Private clients desiring a unique celebration</span>
+                </li>
+                <li>
+                    <span class="lang-es">Espacios que apuestan por propuestas artísticas originales</span>
+                    <span class="lang-en">Venues betting on original artistic proposals</span>
+                </li>
+            </ul>
+
+            <div class="divider"></div>
+
+            <h3>
+                <span class="lang-es">Dos opciones, un mismo nivel de calidad</span>
+                <span class="lang-en">Two options, same level of quality</span>
+            </h3>
+            <div class="comparison">
+                <div class="comparison-col">
+                    <h3>
+                        <span class="lang-es">Espectáculos prediseñados</span>
+                        <span class="lang-en">Pre-designed shows</span>
+                    </h3>
+                    <ul>
+                        <li><span class="lang-es">Concepto ya creado</span><span class="lang-en">Already created concept</span></li>
+                        <li><span class="lang-es">Más ágiles de contratar</span><span class="lang-en">Faster to book</span></li>
+                        <li><span class="lang-es">Adaptables en formato</span><span class="lang-en">Adaptable format</span></li>
+                    </ul>
+                </div>
+                <div class="comparison-col">
+                    <h3>
+                        <span class="lang-es">Espectáculos a medida</span>
+                        <span class="lang-en">Custom shows</span>
+                    </h3>
+                    <ul>
+                        <li><span class="lang-es">Concepto creado desde cero</span><span class="lang-en">Concept created from scratch</span></li>
+                        <li><span class="lang-es">Totalmente personalizados</span><span class="lang-en">Fully personalized</span></li>
+                        <li><span class="lang-es">Exclusivos para tu evento</span><span class="lang-en">Exclusive to your event</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <a href="#contacto" class="btn">
+                <span class="lang-es-inline">Cuéntanos tu idea</span>
+                <span class="lang-en-inline">Tell us your idea</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Artists Section -->
+    <section id="artistas">
+        <div class="container">
+            <h2>
+                <span class="lang-es">ARTISTAS & ANIMACIÓN</span>
+                <span class="lang-en">ARTISTS & ENTERTAINMENT</span>
+            </h2>
+            <p class="subtitle">
+                <span class="lang-es">El complemento perfecto para tu evento</span>
+                <span class="lang-en">The perfect complement for your event</span>
+            </p>
+            <p>
+                <span class="lang-es">Ofrecemos artistas y animación de alto nivel para crear atmósferas únicas, momentos sorpresa y experiencias memorables.</span>
+                <span class="lang-en">We offer high-level artists and entertainment to create unique atmospheres, surprise moments, and memorable experiences.</span>
+            </p>
+            <div class="divider"></div>
+
+            <!-- Performance Artists -->
+            <div class="artists-category">
+                <h3>
+                    <span class="lang-es">ANIMACIÓN & PERFORMANCE</span>
+                    <span class="lang-en">ENTERTAINMENT & PERFORMANCE</span>
+                </h3>
+                <div class="artist-grid">
+                    <div class="artist-item">
+                        <img src="media/Bailarina 4.jpg" alt="Bailarina">
+                        <div class="label">
+                            <span class="lang-es">Bailarinas</span>
+                            <span class="lang-en">Dancers</span>
+                        </div>
+                    </div>
+                    <div class="artist-item">
+                        <img src="media/Fuego animación_.jpg" alt="Fire Performance">
+                        <div class="label">
+                            <span class="lang-es">Fuego</span>
+                            <span class="lang-en">Fire</span>
+                        </div>
+                    </div>
+                    <div class="artist-item">
+                        <video autoplay muted loop playsinline>
+                            <source src="media/Zancos.mp4" type="video/mp4">
+                        </video>
+                        <div class="label">
+                            <span class="lang-es">Zancudos</span>
+                            <span class="lang-en">Stilt walkers</span>
+                        </div>
+                    </div>
+                    <div class="artist-item">
+                        <img src="media/Mago.webp" alt="Magician">
+                        <div class="label">
+                            <span class="lang-es">Magos</span>
+                            <span class="lang-en">Magicians</span>
+                        </div>
+                    </div>
+                    <div class="artist-item">
+                        <video autoplay muted loop playsinline>
+                            <source src="media/Tarotista_.mp4" type="video/mp4">
+                        </video>
+                        <div class="label">
+                            <span class="lang-es">Tarotistas</span>
+                            <span class="lang-en">Tarot readers</span>
+                        </div>
+                    </div>
+                    <div class="artist-item">
+                        <img src="media/Michael Jackson imitador_.jpg" alt="Michael Jackson Tribute">
+                        <div class="label">
+                            <span class="lang-es">Imitadores</span>
+                            <span class="lang-en">Tribute artists</span>
+                        </div>
+                    </div>
+                    <div class="artist-item">
+                        <img src="media/Zancos y fuego_.jpg" alt="Stilt and Fire">
+                        <div class="label">
+                            <span class="lang-es">Shows combinados</span>
+                            <span class="lang-en">Combined shows</span>
+                        </div>
+                    </div>
+                    <div class="artist-item">
+                        <img src="media/Fuego animación 2.jpg" alt="Fire Animation">
+                        <div class="label">
+                            <span class="lang-es">Animación temática</span>
+                            <span class="lang-en">Themed animation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <a href="#contacto" class="btn">
+                <span class="lang-es-inline">Solicitar información</span>
+                <span class="lang-en-inline">Request information</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto">
+        <div class="container">
+            <div class="form-container">
+                <h2>
+                    <span class="lang-es">CONTACTO</span>
+                    <span class="lang-en">CONTACT</span>
+                </h2>
+                <p class="subtitle">
+                    <span class="lang-es">Cuéntanos brevemente qué tienes en mente</span>
+                    <span class="lang-en">Tell us briefly what you have in mind</span>
+                </p>
+                <div class="divider"></div>
+
+                <form action="https://formsubmit.co/georgiaproducciones@gmail.com" method="POST">
+                    <!-- FormSubmit configuration -->
+                    <input type="hidden" name="_subject" value="Nueva consulta desde la web de Greppi Producciones">
+                    <input type="hidden" name="_captcha" value="true">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="text" name="_honey" style="display:none">
+
+                    <div class="form-group">
+                        <label for="nombre">
+                            <span class="lang-es-inline">Nombre *</span>
+                            <span class="lang-en-inline">Name *</span>
+                        </label>
+                        <input type="text" id="nombre" name="nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono">
+                            <span class="lang-es-inline">Teléfono</span>
+                            <span class="lang-en-inline">Phone</span>
+                        </label>
+                        <input type="tel" id="telefono" name="telefono">
+                    </div>
+                    <div class="form-group">
+                        <label for="tipo">
+                            <span class="lang-es-inline">Tipo de evento</span>
+                            <span class="lang-en-inline">Event type</span>
+                        </label>
+                        <select id="tipo" name="tipo_evento">
+                            <option value="">--</option>
+                            <option value="Evento de empresa / Corporate event">
+                                Evento de empresa / Corporate event
+                            </option>
+                            <option value="Evento privado / Private event">
+                                Evento privado / Private event
+                            </option>
+                            <option value="Fiesta temática / Themed party">
+                                Fiesta temática / Themed party
+                            </option>
+                            <option value="Espectáculo a medida / Custom show">
+                                Espectáculo a medida / Custom show
+                            </option>
+                            <option value="Otro / Other">
+                                Otro / Other
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="mensaje">
+                            <span class="lang-es-inline">Mensaje *</span>
+                            <span class="lang-en-inline">Message *</span>
+                        </label>
+                        <textarea id="mensaje" name="mensaje" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">
+                        <span class="lang-es-inline">Enviar mensaje</span>
+                        <span class="lang-en-inline">Send message</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 GREPPI PRODUCCIONES.
+            <span class="lang-es-inline">Todos los derechos reservados.</span>
+            <span class="lang-en-inline">All rights reserved.</span>
+        </p>
+    </footer>
+
+    <script>
+        function toggleLanguage() {
+            document.body.classList.toggle('en');
+        }
+
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
